@@ -1,18 +1,11 @@
 <?php
- 
+
 namespace App\Controllers;
 
 use Psr\Http\Message\ResponseInterface;
 
-class HomeController  extends BaseController
+class AdminController extends BaseController
 {
-     private $response;
-
-    public function __construct(ResponseInterface $response)
-    {
-        $this->response = $response;
-    } 
-
     public function permit(): ResponseInterface
     {
         $response = $this->response->withHeader('Content-Type', 'text/html');
@@ -29,6 +22,6 @@ class HomeController  extends BaseController
             ->write("<html><head></head><body>Admin Index!</body></html>");
 
         return $response;
-    }    
+    }
 
 }

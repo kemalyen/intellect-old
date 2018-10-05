@@ -3,15 +3,18 @@
 namespace App\Controllers;
 
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface as Request; 
 
-class HomeController  extends BaseController
+class HomeController extends BaseController
 {
-     private $response;
-
-    public function __construct(ResponseInterface $response)
+    public function hello(Request $request): ResponseInterface
     {
-        $this->response = $response;
-    } 
+        $response = $this->response->withHeader('Content-Type', 'text/html');
+        $response->getBody()
+            ->write("<html><head></head><body>Hello ". $request->getAttribute('name') ."!</body></html>");
+
+        return $response;        
+    }
 
     public function say(): ResponseInterface
     {

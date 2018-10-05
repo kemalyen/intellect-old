@@ -1,9 +1,16 @@
 <?php
 
 namespace App\Controllers;
-
+use Psr\Http\Message\ResponseInterface;
 abstract class BaseController
 {
+    public $response;
+
+    public function __construct(ResponseInterface $response)
+    {
+        $this->response = $response;
+    }
+
     public function callAction($method, $parameters)
     {
         return call_user_func_array([$this, $method], $parameters);

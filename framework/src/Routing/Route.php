@@ -4,13 +4,14 @@ namespace Intellect\Routing;
 
 use FastRoute\RouteCollector;
 use function FastRoute\simpleDispatcher;
+use Intellect\Container\Container;
 use Psr\Container\ContainerInterface;
 
 class Route
 {
     protected $container;
 
-    public function __construct($container = null)
+    public function __construct(Container $container = null)
     {
         $this->container = $container;
     }
