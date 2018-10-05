@@ -1,0 +1,41 @@
+{
+    "name": "intellect/framework",
+    "description": "A sample rest framework",
+    "keywords": ["php", "rest"],
+    "license": "MIT",
+    "homepage": "http://www.gazatem.com",
+    "authors": [
+        {
+            "name": "Kemal Yenilmez",
+            "email": "kemalyen@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.1.3",
+        "ext-mbstring": "*",
+        "ext-openssl": "*"
+    },
+    "require-dev": {
+
+    },
+    "autoload": {
+        "files": [
+
+        ],
+        "psr-4": {
+            "Intellect\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "files": [
+ 
+        ],
+        "psr-4": {
+  
+        }
+    },
+    "suggest": {
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

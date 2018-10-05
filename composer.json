@@ -1,0 +1,34 @@
+{
+    "name": "gazatem/web",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kemal Yenilmez",
+            "email": "kemalyen@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "framework",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],    
+    "require": {
+        "php-di/php-di": "dev-master",
+        "relay/relay": "2.x@dev",
+        "zendframework/zend-diactoros": "^1.8@dev",
+        "middlewares/fast-route": "dev-master",
+        "middlewares/request-handler": "dev-master",
+        "intellect/framework": "@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
