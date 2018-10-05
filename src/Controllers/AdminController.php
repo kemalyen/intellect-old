@@ -4,13 +4,31 @@ namespace App\Controllers;
 
 use Psr\Http\Message\ResponseInterface;
 
+use League\Fractal;
+use League\Fractal\Serializer\JsonApiSerializer;
+use League\Fractal\Manager;
+
 class AdminController extends BaseController
 {
     public function permit(): ResponseInterface
     {
-        $response = $this->response->withHeader('Content-Type', 'text/html');
+        $book = new \stdClass();
+        $book->id = 1;
+        $book->title = 'Deneme';
+
+        $resource = new Fractal\Resource\Item($book, function ($book) {
+            return [
+                'id' => (int)$book->id,
+                'title' => $book->title,
+
+            ];
+        });
+        $manager = new Manager();
+        $manager->setSerializer(new JsonApiSerializer());
+        $result = $manager->createData($resource)->toJson();
+        $response = $this->response->withHeader('Content-Type', 'application/json');
         $response->getBody()
-            ->write("<html><head></head><body>Admin Permit!</body></html>");
+            ->write($result);
 
         return $response;
     }
