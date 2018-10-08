@@ -1,14 +1,35 @@
 <?php
 
 namespace App\Controllers;
+
 use Psr\Http\Message\ResponseInterface;
+
+
 abstract class BaseController
 {
     public $response;
+    protected $middleware = [];
 
     public function __construct(ResponseInterface $response)
     {
         $this->response = $response;
+    }
+
+
+    public function middleware($middleware, array $options = [])
+    {
+        foreach ((array)$middleware as $m) {
+            $this->middleware[] = [
+                'middleware' => $m,
+                'options' => &$options,
+            ];
+        }
+    }
+
+
+    public function getMiddleware()
+    {
+        return $this->middleware;
     }
 
     public function callAction($method, $parameters)
@@ -19,8 +40,8 @@ abstract class BaseController
     /**
      * Handle calls to missing methods on the controller.
      *
-     * @param  string  $method
-     * @param  array   $parameters
+     * @param  string $method
+     * @param  array $parameters
      * @return mixed
      *
      * @throws \BadMethodCallException

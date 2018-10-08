@@ -17,6 +17,7 @@ $route = $app->get('Route');
 $router = $route->addRoutes($route_list);
 $container = $app->get('Container');
 
+
 $middlewareQueue = [];
 $middlewareQueue[] = new AuthMiddleware();
 $middlewareQueue[] = new RouteMiddleware($router);
