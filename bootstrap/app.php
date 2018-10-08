@@ -20,8 +20,8 @@ $container = $app->get('Container');
 $middlewareQueue = [];
 $middlewareQueue[] = new AuthMiddleware();
 $middlewareQueue[] = new RouteMiddleware($router);
-$middlewareQueue[] = new RequestHandler($container);    
- 
+$middlewareQueue[] = new RequestHandler($container);
+$middlewareQueue[] = new AuthMiddleware();
 $requestHandler = new Relay($middlewareQueue);
 $response = $requestHandler->handle(ServerRequestFactory::fromGlobals());
 $emitter = new SapiEmitter();

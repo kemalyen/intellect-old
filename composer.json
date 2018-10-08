@@ -25,7 +25,8 @@
         "middlewares/fast-route": "dev-master",
         "middlewares/request-handler": "dev-master",
         "intellect/framework": "@dev",
-        "league/fractal": "^0.13.0@dev"
+        "league/fractal": "^0.13.0@dev",
+        "rbdwllr/reallysimplejwt": "dev-master"
     },
     "autoload": {
         "psr-4": {

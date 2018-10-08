@@ -21,13 +21,13 @@ class Route
         $routes = simpleDispatcher(function (RouteCollector $r) use ($route_list) {
             foreach ($route_list as $route) {
                 $r->addRoute($route['method'], $route['path'], $route['handler']);
-                $this->setContainer($route['handler']);
+                $this->setRouteToContainer($route['handler']);
             }
         });
         return $routes;
     }
 
-    private function setContainer($route)
+    private function setRouteToContainer($route)
     {
         list($controller, $method) = explode('@', $route);
 

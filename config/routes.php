@@ -6,6 +6,5 @@ return [
     ['method' => 'POST', 'path'  => '/hit', 'handler' => 'App\Controllers\HomeController@post_hit'],
     ['method' => 'GET', 'path'  => '/hello/{name}', 'handler' => 'App\Controllers\HomeController@hello'],
     ['method' => 'GET', 'path'  => '/permit', 'handler' => 'App\Controllers\AdminController@permit'],
-    ['method' => 'GET', 'path'  => '/index', 'handler' => 'App\Controllers\AdminController@index'],
+    ['method' => 'GET', 'path'  => '/index', 'handler' => 'App\Controllers\AdminController@index', 'middlewares' => ['auth']],
 ]; 
- 
