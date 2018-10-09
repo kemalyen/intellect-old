@@ -20,6 +20,7 @@ class AuthMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        print_r($request->getAttribute('route'));
         return $handler->handle($request);
     } 
 
