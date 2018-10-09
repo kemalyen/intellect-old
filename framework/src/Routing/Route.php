@@ -21,7 +21,7 @@ class Route
         $routes = simpleDispatcher(function (RouteCollector $r) use ($route_list) {
             foreach ($route_list as $route) {
                 $r->addRoute($route['method'], $route['path'], $route['handler']);
-                $this->setRouteToContainer($route['handler'], (isset($route['middlewares']) ? $route['middlewares'] : null));
+                $this->setRouteToContainer($route['handler'], ((isset($route['middlewares']) ? $route['middlewares'] : [])));
             }
         });
         return $routes;
@@ -30,12 +30,17 @@ class Route
     private function setRouteToContainer($route, $middlewares = [])
     {
         list($controller, $method) = explode('@', $route);
+
+        $this->container->set($route.".middlewares", 
+                                            [
+                                                new \App\Middlewares\AuthMiddleware,
+                                                new \App\Middlewares\RoleMiddleware
+                                            ]
+                                        );        
         $this->container->set($route, 
                         function(ContainerInterface $c) use ($controller, $method, $middlewares) {
-
-                            //var_dump($middlewares);
-
                             $class = new $controller($c->get('Response'));
+                            $class->middleware($middlewares);
                             return [$class, $method];
                         }
         );

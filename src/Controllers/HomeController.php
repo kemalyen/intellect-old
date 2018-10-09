@@ -9,15 +9,19 @@ class HomeController extends BaseController
 {
     public function hello(Request $request): ResponseInterface
     {
+        $user = $request->getAttribute('user');
+
         $response = $this->response->withHeader('Content-Type', 'text/html');
         $response->getBody()
-            ->write("<html><head></head><body>Hello ". $request->getAttribute('name') ."!</body></html>");
+            ->write("<html><head></head><body>Hello ". $request->getAttribute('name') . " -". $user->getEmail() ."!</body></html>");
 
         return $response;        
     }
 
     public function say(): ResponseInterface
     {
+
+        var_dump($this->getMiddleware());
         $response = $this->response->withHeader('Content-Type', 'text/html');
         $response->getBody()
             ->write("<html><head></head><body>Hello world!</body></html>");
