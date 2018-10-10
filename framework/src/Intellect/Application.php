@@ -16,6 +16,7 @@ class Application
     {
         $this->container = new Container();
         $this->addDefinationsContainer();
+         
     }
 
     public function run()
@@ -37,6 +38,7 @@ class Application
             },
         ]);
     }
+ 
 
     public function get($id)
     {

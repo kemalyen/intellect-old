@@ -18,17 +18,12 @@ $route = $app->get('Route');
 $router = $route->addRoutes($route_list);
 $container = $app->get('Container');
 
-
 $middlewareQueue = [];
- 
 $middlewareQueue[] = new RouteMiddleware($router);
 $middlewareQueue[] = new ControllerMiddleware($container);
-//$middlewareQueue[] = new AuthMiddleware();
 $middlewareQueue[] = new RequestHandler($container);
   
-
 $requestHandler = new Relay($middlewareQueue);
-
 $response = $requestHandler->handle(ServerRequestFactory::fromGlobals());
  
 $emitter = new SapiEmitter();

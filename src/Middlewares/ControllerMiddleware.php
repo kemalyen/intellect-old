@@ -39,7 +39,7 @@ class ControllerMiddleware implements MiddlewareInterface
  
         array_map( function($requestHandler) use ($request, $handler)
         {
-            return $requestHandler->process($request, $handler);
+            return (new $requestHandler)->process($request, $handler);
         
         }, $middlewares);
  

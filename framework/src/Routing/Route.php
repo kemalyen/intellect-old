@@ -30,13 +30,9 @@ class Route
     private function setRouteToContainer($route, $middlewares = [])
     {
         list($controller, $method) = explode('@', $route);
-
-        $this->container->set($route.".middlewares", 
-                                            [
-                                                new \App\Middlewares\AuthMiddleware,
-                                                new \App\Middlewares\RoleMiddleware
-                                            ]
-                                        );        
+        
+        
+        $this->container->set($route.".middlewares", $middlewares);
         $this->container->set($route, 
                         function(ContainerInterface $c) use ($controller, $method, $middlewares) {
                             $class = new $controller($c->get('Response'));

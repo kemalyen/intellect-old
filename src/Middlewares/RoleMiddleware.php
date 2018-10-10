@@ -15,7 +15,6 @@ class RoleMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        var_dump("rollll!");
         return $handler->handle($request);
     }
  
