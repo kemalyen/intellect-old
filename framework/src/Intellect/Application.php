@@ -36,6 +36,7 @@ class Application
             'Request' => function () {
                 return new Request();
             },
+            'Authenticate'    => create(\Intellect\Auth\Authenticate::class)
         ]);
     }
  

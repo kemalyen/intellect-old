@@ -7,21 +7,22 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Middlewares\Utils\Traits\HasResponseFactory;
+ 
 
 class AuthMiddleware implements MiddlewareInterface 
 {
-    use HasResponseFactory;
+     
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        var_dump("authhhh!");
-        $token = $this->fetchToken($request);
+/*         $token = $this->fetchToken($request);
         if ($token != null){
+            
             $request = $request->withAttribute("token", $token);
+            
             $user = new User(1, 'kemalyen@gmail.com');
             $request = $request->withAttribute("user", $user);
-        }
+        } */
 
         return $handler->handle($request);
     }
@@ -29,7 +30,6 @@ class AuthMiddleware implements MiddlewareInterface
     private function fetchToken(ServerRequestInterface $request): string
     {
         $header = "";
-        $message = "Using token from request header";
         $headers = $request->getHeader('Authorization');
         $header = isset($headers[0]) ? $headers[0] : "";
         if (preg_match("/Bearer\s+(.*)$/i", $header, $matches)) {
@@ -40,7 +40,6 @@ class AuthMiddleware implements MiddlewareInterface
 
         //throw new Exception("Token not found.");
     }
-
 
 
     /**

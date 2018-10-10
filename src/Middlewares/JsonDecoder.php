@@ -9,10 +9,8 @@
  *
  */
 namespace App\Middlewares;
-
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-
 /**
  *
  * Deprecated handler for JSON content; consider using JsonContentHandler
@@ -31,7 +29,6 @@ class JsonDecoder
      *
      */
     protected $assoc;
-
     /**
      *
      * User specified recursion depth.
@@ -40,7 +37,6 @@ class JsonDecoder
      *
      */
     protected $maxDepth;
-
     /**
      *
      * Bitmask of JSON decode options. Currently only JSON_BIGINT_AS_STRING is
@@ -50,7 +46,6 @@ class JsonDecoder
      *
      */
     protected $options;
-
     /**
      *
      * Constructor.
@@ -68,7 +63,6 @@ class JsonDecoder
         $this->maxDepth = $maxDepth;
         $this->options = $options;
     }
-
     /**
      *
      * Parses the PSR-7 request body if its content-type is 'application/json'.
@@ -86,7 +80,6 @@ class JsonDecoder
     {
         $parts = explode(';', $request->getHeaderLine('Content-Type'));
         $type = strtolower(trim(array_shift($parts)));
-
         if ($request->getMethod() != 'GET' && $type == 'application/json') {
             $body = (string) $request->getBody();
             $request = $request->withParsedBody(json_decode(
@@ -96,7 +89,6 @@ class JsonDecoder
                 $this->options
             ));
         }
-
         return $next($request, $response);
     }
 }

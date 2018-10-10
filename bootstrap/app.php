@@ -22,9 +22,10 @@ $middlewareQueue = [];
 $middlewareQueue[] = new RouteMiddleware($router);
 $middlewareQueue[] = new ControllerMiddleware($container);
 $middlewareQueue[] = new RequestHandler($container);
-  
+
+ 
 $requestHandler = new Relay($middlewareQueue);
 $response = $requestHandler->handle(ServerRequestFactory::fromGlobals());
- 
+
 $emitter = new SapiEmitter();
 return $emitter->emit($response);

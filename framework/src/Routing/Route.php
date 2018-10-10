@@ -29,14 +29,12 @@ class Route
 
     private function setRouteToContainer($route, $middlewares = [])
     {
-        list($controller, $method) = explode('@', $route);
-        
+        list($controller, $method) = explode('@', $route);        
         
         $this->container->set($route.".middlewares", $middlewares);
         $this->container->set($route, 
-                        function(ContainerInterface $c) use ($controller, $method, $middlewares) {
+                        function(ContainerInterface $c) use ($controller, $method) {
                             $class = new $controller($c->get('Response'));
-                            $class->middleware($middlewares);
                             return [$class, $method];
                         }
         );

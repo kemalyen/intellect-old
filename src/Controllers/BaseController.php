@@ -3,11 +3,17 @@
 namespace App\Controllers;
 
 use Psr\Http\Message\ResponseInterface;
-use App\Middlewares\TestMiddleware;
 
+
+use ReallySimpleJWT\TokenBuilder;
+use ReallySimpleJWT\Token;
+use ReallySimpleJWT\TokenValidator;
 abstract class BaseController
 {
     public $response;
+
+    protected $token;
+
     protected $middleware = [];
 
     public function __construct(ResponseInterface $response)
@@ -15,7 +21,24 @@ abstract class BaseController
         $this->response = $response;
     }
 
+    public function getToken($payload = [])
+    {
+        $expiration = strtotime("+1 week");
+        $builder = new TokenBuilder();
+        $secret = "KMLynlmz@905339200362";
+        $token = $builder->addPayload(['key' => 'foo', 'value' => 'bar'])
+            ->setSecret($secret)
+            ->setExpiration($expiration)
+            ->setIssuer("issuer")
+            ->build();
+        return $this->token = $token;        
+    }
 
+    private function setToken(string $token)
+    {
+        $this->token = $token;
+    }
+ 
     public function dispatch()
     {
         //var_dump($this->getMiddleware());

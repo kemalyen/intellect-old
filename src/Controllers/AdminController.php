@@ -34,14 +34,12 @@ class AdminController extends BaseController
         return $response;
     }
 
-    public function index(Request $request): ResponseInterface
+    public function index(): ResponseInterface
     {
-        var_dump($this->getMiddleware());
-
         //$user = $request->getAttribute('user');
         $response = $this->response->withHeader('Content-Type', 'text/html');
         $response->getBody()
-            ->write("<html><head></head><body>Admin Index!".  ""."</body></html>");
+            ->write("<html><head></head><body>Admin Index!</body></html>");
 
         return $response;
     }
