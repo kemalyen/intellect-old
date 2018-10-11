@@ -9,7 +9,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-
+use Middlewares\Utils\RequestHandlerContainer;
+use Intellect\Container\Container;
 class RouteMiddleware implements MiddlewareInterface
 {
     use HasResponseFactory;
@@ -30,6 +31,7 @@ class RouteMiddleware implements MiddlewareInterface
     public function __construct(Dispatcher $router)
     {
         $this->router = $router;
+
     }
 
     /**
@@ -61,7 +63,6 @@ class RouteMiddleware implements MiddlewareInterface
             $request = $request->withAttribute($name, $value);
         }
 
- 
         $request = $this->setHandler($request, $route[1]);
          
         return $handler->handle($request);

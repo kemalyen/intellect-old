@@ -8,7 +8,7 @@ use League\Fractal;
 use League\Fractal\Serializer\JsonApiSerializer;
 use League\Fractal\Manager;
 use Psr\Http\Message\ServerRequestInterface as Request;
-
+ 
 class AdminController extends BaseController
 {
     public function permit(): ResponseInterface
@@ -34,12 +34,13 @@ class AdminController extends BaseController
         return $response;
     }
 
-    public function index(): ResponseInterface
+    public function index(Request $request): ResponseInterface
     {
-        //$user = $request->getAttribute('user');
+        $user = $request->getAttribute('user');
+        var_dump($user);
         $response = $this->response->withHeader('Content-Type', 'text/html');
         $response->getBody()
-            ->write("<html><head></head><body>Admin Index!</body></html>");
+            ->write("<html><head></head><body>Admin Index!". "." ."</body></html>");
 
         return $response;
     }

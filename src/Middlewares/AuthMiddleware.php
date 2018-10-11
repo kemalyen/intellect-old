@@ -7,22 +7,19 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
- 
 
-class AuthMiddleware implements MiddlewareInterface 
+class AuthMiddleware  implements MiddlewareInterface
 {
-     
-
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-    {
-/*         $token = $this->fetchToken($request);
+    { 
+        var_dump("Auth");
+        $token = $this->fetchToken($request);
         if ($token != null){
             
             $request = $request->withAttribute("token", $token);
-            
-            $user = new User(1, 'kemalyen@gmail.com');
-            $request = $request->withAttribute("user", $user);
-        } */
+            //$user = new User(1, 'kemalyen@gmail.com');
+            //$request = $request->withAttribute("user", $user);
+        } 
 
         return $handler->handle($request);
     }

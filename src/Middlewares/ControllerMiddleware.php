@@ -6,7 +6,9 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
+use Middlewares\Utils\CallableHandler;
 use Psr\Http\Server\RequestHandlerInterface;
+ use Equip\Dispatch\MiddlewareCollection;
 class ControllerMiddleware implements MiddlewareInterface
 {
  
@@ -33,12 +35,13 @@ class ControllerMiddleware implements MiddlewareInterface
  
         array_map( function($requestHandler) use ($request, $handler)
         {
-            return (new $requestHandler)->process($request, $handler);
-        
-        }, $middlewares); 
- 
+            if (is_string($requestHandler)) {
+                $requestHandler = $this->container->get($requestHandler);
+            }
+            (new CallableHandler($requestHandler))->process($request, $handler);
+             
+        }, $middlewares);    
          
         return $handler->handle($request);
     }
-  
 }

@@ -26,7 +26,10 @@
         "middlewares/request-handler": "dev-master",
         "intellect/framework": "@dev",
         "league/fractal": "^0.13.0@dev",
-        "rbdwllr/reallysimplejwt": "dev-master"
+        "rbdwllr/reallysimplejwt": "dev-master",
+        "procurios/middleware-dispatcher": "dev-master",
+        "slince/middleware": "dev-master",
+        "equip/dispatch": "dev-master"
     },
     "autoload": {
         "psr-4": {

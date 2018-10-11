@@ -32,6 +32,15 @@ class Route
         list($controller, $method) = explode('@', $route);        
         
         $this->container->set($route.".middlewares", $middlewares);
+
+        foreach($middlewares as $middleware){
+            $this->container->set($middleware, 
+                            function(ContainerInterface $c) use ($middleware) {
+                                $class = new $middleware;
+                                return [$class, 'process'];
+                            });                        
+        }
+
         $this->container->set($route, 
                         function(ContainerInterface $c) use ($controller, $method) {
                             $class = new $controller($c->get('Response'));
@@ -39,4 +48,5 @@ class Route
                         }
         );
     }
+
 }
