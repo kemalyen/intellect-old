@@ -12,7 +12,7 @@ class AuthMiddleware  implements MiddlewareInterface
 {
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     { 
-        var_dump("Auth");
+ 
         $token = $this->fetchToken($request);
         if ($token != null){
             

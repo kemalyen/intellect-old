@@ -12,7 +12,7 @@ class RoleMiddleware implements MiddlewareInterface
 {
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {  
-        var_dump("Role");
+         
         $user = new User(1, 'kemalyen@gmail.com');
         $request = $request->withAttribute("user", $user);
         return $handler->handle($request);

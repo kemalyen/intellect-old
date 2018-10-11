@@ -37,7 +37,7 @@ class Route
             $this->container->set($middleware, 
                             function(ContainerInterface $c) use ($middleware) {
                                 $class = new $middleware;
-                                return [$class, 'process'];
+                                return $class;
                             });                        
         }
 

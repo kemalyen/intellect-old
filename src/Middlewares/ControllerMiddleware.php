@@ -35,11 +35,16 @@ class ControllerMiddleware implements MiddlewareInterface
  
         array_map( function($requestHandler) use ($request, $handler)
         {
+            //return $requestHandler->process($request, $handler); 
             if (is_string($requestHandler)) {
                 $requestHandler = $this->container->get($requestHandler);
             }
-            (new CallableHandler($requestHandler))->process($request, $handler);
-             
+            if ($requestHandler instanceof MiddlewareInterface) {
+                return $requestHandler->process($request, $handler);
+            }
+
+            //(new CallableHandler($requestHandler))->process($request, $handler);
+            
         }, $middlewares);    
          
         return $handler->handle($request);
